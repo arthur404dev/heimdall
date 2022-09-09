@@ -31,7 +31,7 @@ const Protected = ({ children }: { children: ReactNode }) => {
   // Check for unauthorized user
   useEffect(() => {
     if (role && role !== "admin") {
-      router.push("/unauthorized")
+      router.push("/admin/unauthorized")
     }
   }, [role])
   // Early escape if non authorized or authenticated

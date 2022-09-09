@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className='bg-gray-100 px-2 sm:px-4 py-4 fixed w-full z-20 top-0 left-0 border-b border-gray-200'>
       <div className='container flex flex-wrap justify-between items-center mx-auto'>
-        <Link href='/'>
+        <Link href='/internal/'>
           <div className='flex items-center gap-2 hover:cursor-pointer hover:text-gray-700 text-gray-500'>
             <div className='w-8 h-8 relative'>
               <Image
@@ -39,7 +39,7 @@ const Navbar = () => {
               </div>
               <button
                 className='text-white font-bold uppercase bg-gray-900 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-400/50 rounded-lg text-sm px-5 py-4 text-center inline-flex items-center'
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={() => signOut({ callbackUrl: "/internal/" })}
               >
                 Sign Out
               </button>
@@ -49,7 +49,7 @@ const Navbar = () => {
               className='text-white bg-gray-900 hover:bg-gray-900/70 focus:ring-4 focus:outline-none focus:ring-gray-900/50 font-medium rounded-lg text-sm px-5 py-4 text-center inline-flex items-center'
               onClick={() =>
                 signIn("github", {
-                  callbackUrl: "/",
+                  callbackUrl: "/internal/",
                 })
               }
             >

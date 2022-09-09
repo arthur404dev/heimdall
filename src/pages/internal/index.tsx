@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
-import { AdminOnly } from "../components"
+import { AdminOnly } from "../../components"
 
 const Home: NextPage = () => {
   return (
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
             <p className='uppercase'>
               You have access to the following sections:
             </p>
-            <Link href={"/dashboard"}>
+            <Link href={"/internal/dashboard"}>
               <p className='text-xl lowercase hover:cursor-pointer hover:text-orange-500  text-orange-400 hover:font-bold'>
                 /dashboard
               </p>
