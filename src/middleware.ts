@@ -2,6 +2,8 @@ import { NextRequest, NextResponse, userAgent } from "next/server"
 
 const skippedDomains = ["/_next", "/api", "/internal", "/site", "/images"]
 
+console.log("skipped-domains:", JSON.stringify(skippedDomains))
+
 export async function middleware(req: NextRequest) {
   const pathName = req.nextUrl.pathname
   const paths = pathName.split("/")
@@ -13,7 +15,7 @@ export async function middleware(req: NextRequest) {
     return pathName.toLowerCase().startsWith(domain.toLowerCase())
   })
   // Skip protected pathnames
-  if (!shouldSkip && paths.length === 1) {
+  if (!shouldSkip && paths.length === 1 && !slug?.includes(".")) {
     // Extract Data to Log
     const logData = {
       time: now.toISOString(),
