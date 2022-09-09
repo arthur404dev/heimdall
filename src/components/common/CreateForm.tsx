@@ -52,7 +52,9 @@ const CreateLinkForm: NextPage = () => {
           <div
             className='h-10 w-16 flex items-center justify-center cursor-pointer bg-indigo-400 hover:bg-purple-400 rounded-r-md absolute right-0 fill-indigo-900 hover:fill-white'
             onClick={() => {
-              copy(`${url}/${form.slug}`)
+              copy(`${url}/${form.slug}`.toLowerCase(), {
+                format: "text",
+              })
             }}
           >
             <div className='h-10 w-10 p-2.5 fill-inherit'>
@@ -104,7 +106,7 @@ const CreateLinkForm: NextPage = () => {
         </span>
       )}
       <div className='flex items-center flex-col gap-2 w-full'>
-        <div className='flex items-center rounded-lg py-0 pr-1 pl-4 text-sm bg-gray-50 text-gray-900 border border-gray-300 gap-1'>
+        <div className='flex items-center rounded-lg py-0 pr-1 pl-4 text-sm bg-gray-50 text-gray-900 border border-gray-300 gap-1 w-full'>
           <span className='text-gray-400 lowercase'>{url}/</span>
           <input
             type='text'

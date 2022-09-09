@@ -2,14 +2,16 @@ import { NextRequest, NextResponse, userAgent } from "next/server"
 
 const skippedDomains = ["/_next", "/api", "/internal", "/site", "/images"]
 
-console.log("skipped-domains:", JSON.stringify(skippedDomains))
-
 export async function middleware(req: NextRequest) {
   const pathName = req.nextUrl.pathname
   const paths = pathName.split("/")
   const slug = paths.pop()
   const agent = userAgent(req)
   const now = new Date()
+  // Handle index-page
+  if (paths.length === 1 && slug === "") {
+    return NextResponse.redirect(`${req.nextUrl.origin}/internal`)
+  }
   // Start routing logic
   const shouldSkip = skippedDomains.some((domain) => {
     return pathName.toLowerCase().startsWith(domain.toLowerCase())
