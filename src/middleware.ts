@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse, userAgent } from "next/server"
-import { logger } from "../utils"
 
 const skippedDomains = ["/_next", "/api", "/internal", "/site", "/images"]
 
@@ -27,21 +26,22 @@ export async function middleware(req: NextRequest) {
       geo: req.geo,
       slug: slug,
     }
-    logger.info("request:%o", logData)
+    console.info("request:", logData)
+
     // Fetch the full-URL for this request
     const apiReq = await fetch(`${req.nextUrl.origin}/api/get-full-url/${slug}`)
     if (apiReq.status === 404) {
       //Log failure
-      logger.warn("oops:%o", logData)
+      console.warn("oops:", logData)
       return NextResponse.redirect(`${req.nextUrl.origin}/internal/oops`)
     }
     // Success route
     const data = await apiReq.json()
-    logger.info("received-data:%o", data)
+    console.info("received-data:%o", data)
 
     if (data?.url) {
       // Log Happy Path
-      logger.info("success:redirect-to=%s request=%o", data.url, logData)
+      console.info("success:redirect-to=%s request=%o", data.url, logData)
       return NextResponse.redirect(data.url)
     }
   }
