@@ -8,10 +8,18 @@ export async function middleware(req: NextRequest) {
   const slug = paths.pop()
   const agent = userAgent(req)
   const now = new Date()
+  const origin = req.nextUrl.origin
+  const applicationName = process.env.APPLICATION_NAME || "heimdall"
+  const portfolioURL = process.env.PORTFOLIO_URL || `${origin}/internal`
+
   // Handle index-page
   if (paths.length === 1 && slug === "") {
-    return NextResponse.redirect(`${req.nextUrl.origin}/internal`)
+    if (origin.includes(applicationName)) {
+      return NextResponse.redirect(`${origin}/internal`)
+    }
+    return NextResponse.redirect(portfolioURL)
   }
+
   // Start routing logic
   const shouldSkip = skippedDomains.some((domain) => {
     return pathName.toLowerCase().startsWith(domain.toLowerCase())
